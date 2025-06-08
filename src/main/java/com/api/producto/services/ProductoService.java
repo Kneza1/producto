@@ -1,8 +1,8 @@
 package com.api.producto.services;
 
-import com.producto.models.Producto;
-import com.producto.dto.ProductoDTO;
-import com.producto.repository.ProductoRepository;
+import com.api.producto.models.Producto;
+import com.api.producto.dto.ProductoDTO;
+import com.api.producto.repository.ProductoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class ProductoService {
 
     @Autowired
-    private ProductoRepository productoRepository;
+    private ProductoRepository ProductoRepository;
 
     private ProductoDTO toDTO(Producto producto) {
         return new ProductoDTO(
@@ -39,23 +39,23 @@ public class ProductoService {
 
     public ProductoDTO crear(ProductoDTO dto) {
         Producto producto = toEntity(dto);
-        return toDTO(productoRepository.save(producto));
+        return toDTO(ProductoRepository.save(producto));
     }
 
     public List<ProductoDTO> listar() {
-        return productoRepository.findAll().stream()
+        return ProductoRepository.findAll().stream()
                 .map(this::toDTO)
                 .collect(Collectors.toList());
     }
 
     public ProductoDTO obtenerPorId(Integer id) {
-        Producto producto = productoRepository.findById(id)
+        Producto producto = ProductoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
         return toDTO(producto);
     }
 
     public ProductoDTO actualizar(Integer id, ProductoDTO dto) {
-        Producto existente = productoRepository.findById(id)
+        Producto existente = ProductoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Producto no encontrado"));
 
         existente.setNombre(dto.getNombre());
@@ -64,10 +64,10 @@ public class ProductoService {
         existente.setCategoria(dto.getCategoria());
         existente.setActivo(dto.getActivo());
 
-        return toDTO(productoRepository.save(existente));
+        return toDTO(ProductoRepository.save(existente));
     }
 
     public void eliminar(Integer id) {
-        productoRepository.deleteById(id);
+        ProductoRepository.deleteById(id);
     }
 }

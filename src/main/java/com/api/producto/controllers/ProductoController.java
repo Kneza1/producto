@@ -1,7 +1,7 @@
 package com.api.producto.controllers;
 
-import com.producto.dto.ProductoDTO;
-import com.producto.services.ProductoService;
+import com.api.producto.dto.ProductoDTO;
+import com.api.producto.services.ProductoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
